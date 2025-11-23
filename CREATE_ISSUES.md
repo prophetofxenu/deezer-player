@@ -319,21 +319,44 @@ If you prefer to create all issues at once, you can use a script like this:
 \`\`\`bash
 #!/bin/bash
 # Create all migration issues
+# 
+# NOTE: This is a template. You need to populate the arrays
+# with actual issue data from the examples above.
 
-# Array of issue titles, labels, and bodies
-# Add all 25 issues here following the pattern above
+# Example arrays (incomplete - add all 25 issues)
+declare -a titles=(
+  "Research Deezer API Capabilities and Limitations"
+  "Evaluate or Create Deezer Rust SDK"
+  # ... add remaining 23 issues
+)
+
+declare -a labels=(
+  "research,api,priority:critical,phase:1"
+  "dependencies,api,research,priority:critical,phase:1"
+  # ... add remaining 23 label sets
+)
+
+declare -a bodies=(
+  "## Description\nResearch the Deezer API..."
+  "## Description\nDetermine if there's a suitable..."
+  # ... add remaining 23 bodies (properly escaped)
+)
 
 # Loop through and create each issue
-for i in {1..25}; do
+for i in "\${!titles[@]}"; do
   gh issue create \\
-    --title \"$title\" \\
-    --label \"$labels\" \\
-    --body \"$body\"
+    --title "\${titles[$i]}" \\
+    --label "\${labels[$i]}" \\
+    --body "\${bodies[$i]}"
   
-  echo \"Created issue $i\"
+  echo "Created issue $((i+1))"
   sleep 1  # Rate limit protection
 done
+
+echo "Created \${#titles[@]} issues successfully"
 \`\`\`
+
+**Note:** The above script is a template. For actual implementation, copy the full issue descriptions from the templates above into the arrays.
 
 ---
 

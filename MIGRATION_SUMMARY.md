@@ -23,11 +23,17 @@ spotify_player (Rust)
 3. Spotify-specific authentication and OAuth
 
 ### Codebase Statistics
+_(Estimated from repository analysis)_
 - Main client module: ~1,900 lines
 - Client handlers: ~250 lines  
 - Spotify client wrapper: ~140 lines
 - State/model layer: ~1,400 lines
 - Total: ~10,000+ lines including UI and other modules
+
+**Files and Dependencies:**
+- **Files to Modify:** ~50+ files (20 major changes, 15 moderate, 15 minor)
+- **Dependencies to Replace:** ~12+ crates (rspotify family + librespot family)
+- **New Dependencies:** 3-5 crates (Deezer SDK, OAuth client, audio codecs if needed)
 
 ## Migration Path
 

@@ -232,12 +232,30 @@ pub async fn authenticate(
     redirect_uri: String
 ) -> Result<Token> {
     // Custom OAuth 2.0 implementation
+    // Note: Unlike Spotify's OAuthClientBuilder pattern,
+    // Deezer requires a more manual OAuth flow implementation
     let auth_url = format!(
         "https://connect.deezer.com/oauth/auth.php\
          ?app_id={}&redirect_uri={}&perms={}",
         app_id, redirect_uri, permissions
     );
-    // ... OAuth flow
+    
+    // 1. Open browser to auth_url
+    // 2. Start local server to receive callback
+    // 3. Extract code from callback
+    // 4. Exchange code for access token
+    let token = exchange_code_for_token(code, app_id).await?;
+    
+    Ok(token)
+}
+
+async fn exchange_code_for_token(
+    code: String, 
+    app_id: String
+) -> Result<Token> {
+    // POST to https://connect.deezer.com/oauth/access_token.php
+    // with code and app_id parameters
+    // ...
 }
 ```
 
